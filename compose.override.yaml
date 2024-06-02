@@ -1,0 +1,9 @@
+services:
+  php:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      # See https://xdebug.org/docs/all_settings#mode
+      XDEBUG_MODE: "${XDEBUG_MODE:-off}"
+    tty: true

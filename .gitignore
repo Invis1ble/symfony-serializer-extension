@@ -1,0 +1,20 @@
+/var/
+/vendor/
+composer.lock
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.cache
+/.php-cs-fixer.php
+###< friendsofphp/php-cs-fixer ###
+
+###> phpunit/phpunit ###
+/.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs.cache
+###< squizlabs/php_codesniffer ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

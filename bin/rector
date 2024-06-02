@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+vendor/bin/rector process \
+    --config=rector.php \
+    --dry-run

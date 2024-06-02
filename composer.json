@@ -1,0 +1,41 @@
+{
+    "version": "0.1.0",
+    "name": "invis1ble/symfony-serializer-extension",
+    "type": "library",
+    "description": "Additional useful (de)normalizers for symfony/serializer .",
+    "authors": [
+        {
+            "name": "Invis1ble",
+            "email": "Invis1ble@users.noreply.github.com"
+        }
+    ],
+    "keywords": [
+        "serializer",
+        "deserializer",
+        "normalizer",
+        "denormalizer",
+        "symfony",
+        "extension"
+    ],
+    "require": {
+        "php": ">=8.1",
+        "psr/http-factory": "^1.0",
+        "psr/http-message": "^1.1||^2.0",
+        "symfony/serializer": "^6.4|^v7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.2@dev",
+        "escapestudios/symfony2-coding-standard": "^3.13@dev",
+        "friendsofphp/php-cs-fixer": "dev-master",
+        "rector/rector": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "Invis1ble\\SymfonySerializerExtension\\": "src/",
+            "Invis1ble\\SymfonySerializerExtension\\Tests\\": "tests/"
+        },
+        "exclude-from-classmap": ["/tests/"]
+    },
+    "minimum-stability": "dev",
+    "license": "MIT"
+}

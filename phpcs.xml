@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="." />
+    <arg name="cache" value=".phpcs.cache" />
+    <arg name="colors" />
+    <arg name="extensions" value="php" />
+
+    <config name="installed_paths" value="vendor/escapestudios/symfony2-coding-standard" />
+    <config name="testVersion" value="8.2-" />
+
+    <rule ref="Symfony">
+        <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound" />
+        <exclude name="Symfony.Commenting.ClassComment.Missing" />
+        <exclude name="Symfony.Commenting.FunctionComment.Missing" />
+        <exclude name="Symfony.Commenting.FunctionComment.MissingParamTag" />
+        <exclude name="Symfony.Commenting.FunctionComment.MissingReturn" />
+        <exclude name="Symfony.Commenting.License" />
+        <exclude name="Symfony.Functions.Arguments.Invalid" />
+        <exclude name="Symfony.NamingConventions.ValidClassName.InvalidAbstractName" />
+    </rule>
+
+    <rule ref="Generic.PHP.RequireStrictTypes" />
+
+    <!-- Exclude the Composer Vendor directory. -->
+    <exclude-pattern>/vendor/*</exclude-pattern>
+
+    <file>.</file>
+
+</ruleset>
