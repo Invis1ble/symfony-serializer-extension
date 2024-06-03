@@ -1,5 +1,4 @@
 {
-    "version": "1.0.3",
     "name": "invis1ble/symfony-serializer-extension",
     "type": "library",
     "description": "Additional useful (de)normalizers for symfony/serializer .",
