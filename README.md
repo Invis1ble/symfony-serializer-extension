@@ -23,7 +23,7 @@ or just add it as a dependency in your `composer.json` file:
 
 {
     "require": {
-        "invis1ble/symfony-serializer-extension": "^0.1"
+        "invis1ble/symfony-serializer-extension": "^1.0"
     }
 }
 ```
