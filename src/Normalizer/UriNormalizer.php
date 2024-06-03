@@ -6,19 +6,13 @@ namespace Invis1ble\SymfonySerializerExtension\Normalizer;
 
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface;
-use Symfony\Component\Serializer\NameConverter\NameConverterInterface;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class UriNormalizer extends AbstractNormalizer
+class UriNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    public function __construct(
-        protected readonly UriFactoryInterface $uriFactory,
-        ?ClassMetadataFactoryInterface $classMetadataFactory = null,
-        ?NameConverterInterface $nameConverter = null,
-        array $defaultContext = [],
-    ) {
-        parent::__construct($classMetadataFactory, $nameConverter, $defaultContext);
+    public function __construct(protected readonly UriFactoryInterface $uriFactory)
+    {
     }
 
     public function normalize(

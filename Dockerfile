@@ -8,8 +8,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN set -eux; \
-    pecl install xdebug-3.3.2 \
-    && docker-php-ext-enable xdebug
+    if ! pecl list | grep -q xdebug; then \
+        pecl install xdebug-3.3.2 && docker-php-ext-enable xdebug; \
+    fi
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
