@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Invis1ble\SymfonySerializerExtension\Normalizer;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -34,6 +35,7 @@ class UriNormalizer implements NormalizerInterface, DenormalizerInterface
     public function getSupportedTypes(?string $format): array
     {
         return [
+            Uri::class => true,
             UriInterface::class => true,
         ];
     }
@@ -53,6 +55,9 @@ class UriNormalizer implements NormalizerInterface, DenormalizerInterface
         ?string $format = null,
         array $context = [],
     ): bool {
-        return UriInterface::class === $type;
+        return in_array($type, [
+            Uri::class,
+            UriInterface::class,
+        ], true);
     }
 }
