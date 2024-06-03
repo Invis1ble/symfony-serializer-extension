@@ -50,7 +50,7 @@ class UriNormalizer extends AbstractNormalizer
         ?string $format = null,
         array $context = [],
     ): UriInterface {
-        return $this->uriFactory->createUri((string) $data);
+        return $this->uriFactory->createUri($data);
     }
 
     public function supportsDenormalization(
