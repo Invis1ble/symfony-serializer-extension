@@ -40,6 +40,18 @@ jobs:
         name: Check Code Quality via PHP-CS-Fixer
         run: docker compose exec -T php bin/php-cs-fixer
       -
+        name: Rector Cache
+        uses: actions/cache@v4
+        with:
+          path: /tmp/rector
+          key: ${{ runner.os }}-rector-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-rector-
+      -
+        run: mkdir -p /tmp/rector
+      -
+        name: Rector Dry Run
+        run: docker compose exec -T php bin/rector
+      -
         name: Execute tests via PHPUnit
         run: docker compose exec -T php vendor/bin/phpunit --coverage-clover var/log/coverage-clover.xml
       -
