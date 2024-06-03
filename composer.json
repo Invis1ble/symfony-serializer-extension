@@ -29,6 +29,9 @@
         "friendsofphp/php-cs-fixer": "dev-master",
         "rector/rector": "dev-main"
     },
+    "suggest": {
+        "guzzlehttp/guzzle": "Guzzle is a PHP HTTP client that makes it easy to send HTTP requests and trivial to integrate with web services."
+    },
     "autoload": {
         "psr-4": {
             "Invis1ble\\SymfonySerializerExtension\\": "src/",
