@@ -35,6 +35,28 @@ composer install
 ```
 
 
+Usage
+-----------
+
+Currently implemented `UriNormalizer` only.
+
+This normalizer is designed for normalizing `Uri` objects implementing the `Psr\Http\Message\UriInterface`.
+
+Read the official [documentation for the Serializer](https://symfony.com/doc/current/components/serializer.html#usage) component to use normalizers.
+
+```php
+use Invis1ble\SymfonySerializerExtension\Normalizer\UriNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Serializer;
+
+$encoders = [new XmlEncoder(), new JsonEncoder()];
+$normalizers = [new UriNormalizer()];
+
+$serializer = new Serializer($normalizers, $encoders);
+```
+
+
 Development
 -----------
 
