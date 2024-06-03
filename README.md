@@ -6,7 +6,9 @@ Symfony Serializer Extension
 [![Packagist](https://img.shields.io/packagist/v/Invis1ble/symfony-serializer-extension.svg)](https://packagist.org/packages/Invis1ble/symfony-serializer-extension)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-A useful set of additional (de)normalizers for [symfony/serializer](https://github.com/symfony/serializer)
+A useful set of additional (de)normalizers for [symfony/serializer](https://github.com/symfony/serializer):
+
+- `UriNormalizer` for normalizing objects implementing `Psr\Http\Message\UriInterface`
 
 Installation
 ------------
@@ -51,7 +53,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Serializer;
 
 $encoders = [new XmlEncoder(), new JsonEncoder()];
-$normalizers = [new UriNormalizer()];
+$normalizers = [new UriNormalizer($uriFactory)];
 
 $serializer = new Serializer($normalizers, $encoders);
 ```
