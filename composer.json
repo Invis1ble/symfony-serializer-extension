@@ -1,5 +1,5 @@
 {
-    "version": "0.1.3",
+    "version": "1.0.0",
     "name": "invis1ble/symfony-serializer-extension",
     "type": "library",
     "description": "Additional useful (de)normalizers for symfony/serializer .",
@@ -14,6 +14,10 @@
         "deserializer",
         "normalizer",
         "denormalizer",
+        "uri",
+        "url",
+        "uriinterface",
+        "psr",
         "symfony",
         "extension"
     ],
@@ -28,6 +32,9 @@
         "escapestudios/symfony2-coding-standard": "^3.13@dev",
         "friendsofphp/php-cs-fixer": "dev-master",
         "rector/rector": "dev-main"
+    },
+    "suggest": {
+        "guzzlehttp/guzzle": "Guzzle is a PHP HTTP client that makes it easy to send HTTP requests and trivial to integrate with web services."
     },
     "autoload": {
         "psr-4": {
