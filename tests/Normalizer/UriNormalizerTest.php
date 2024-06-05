@@ -53,13 +53,12 @@ class UriNormalizerTest extends TestCase
         $this->assertFalse($this->normalizer->supportsNormalization($uri));
     }
 
-    #[DataProvider('provideSupportedType')]
-    public function testGetSupportedTypes(string $fqn): void
+    public function testGetSupportedTypes(): void
     {
         $supportedTypes = $this->normalizer->getSupportedTypes(null);
 
-        $this->assertArrayHasKey($fqn, $supportedTypes);
-        $this->assertTrue($supportedTypes[$fqn]);
+        $this->assertArrayHasKey(UriInterface::class, $supportedTypes);
+        $this->assertTrue($supportedTypes[UriInterface::class]);
     }
 
     #[DataProvider('provideSupportedType')]
