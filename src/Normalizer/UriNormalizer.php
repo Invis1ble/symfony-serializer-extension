@@ -35,7 +35,6 @@ class UriNormalizer implements NormalizerInterface, DenormalizerInterface
     public function getSupportedTypes(?string $format): array
     {
         return [
-            Uri::class => true,
             UriInterface::class => true,
         ];
     }
