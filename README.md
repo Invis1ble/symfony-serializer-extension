@@ -2,7 +2,7 @@ Symfony Serializer Extension
 ============================
 
 ![CI Status](https://github.com/Invis1ble/symfony-serializer-extension/actions/workflows/ci.yml/badge.svg?event=push)
-[![Code Coverage](https://codecov.io/gh/Invis1ble/symfony-serializer-extension/graph/badge.svg?token=AQRIP417A4)](https://codecov.io/gh/Invis1ble/symfony-serializer-extension)
+[![Code Coverage](https://codecov.io/gh/Invis1ble/symfony-serializer-extension/graph/badge.svg?token=6UQDPQ9ZO7)](https://codecov.io/gh/Invis1ble/symfony-serializer-extension)
 [![Packagist](https://img.shields.io/packagist/v/Invis1ble/symfony-serializer-extension.svg)](https://packagist.org/packages/Invis1ble/symfony-serializer-extension)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
