@@ -22,6 +22,6 @@ return RectorConfig::configure()
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
     ->withCache(
-        cacheDirectory: '/tmp/rector',
+        cacheDirectory: __DIR__ . '/var/cache/rector',
         cacheClass: FileCacheStorage::class,
     );
