@@ -10,6 +10,21 @@ A useful set of additional (de)normalizers for [symfony/serializer](https://gith
 
 - `UriNormalizer` for normalizing objects implementing `Psr\Http\Message\UriInterface`
 
+Requirements
+------------
+
+Version 1.2 adds Symfony Serializer 8 support without changing the normalizer API
+or dropping compatibility with earlier supported versions:
+
+| Symfony Serializer | Minimum PHP version |
+| --- | --- |
+| 6.4 | 8.1 |
+| 7.x | 8.2 |
+| 8.x | 8.4.1 |
+
+Both PSR-7 1.1 and 2.x are supported. Provide a PSR-17 `UriFactoryInterface`
+implementation when constructing the normalizer. Guzzle is optional at runtime.
+
 Installation
 ------------
 
@@ -25,7 +40,7 @@ or just add it as a dependency in your `composer.json` file:
 
 {
     "require": {
-        "invis1ble/symfony-serializer-extension": "^1.0"
+        "invis1ble/symfony-serializer-extension": "^1.2"
     }
 }
 ```
@@ -58,6 +73,23 @@ $normalizers = [new UriNormalizer($uriFactory)];
 $serializer = new Serializer($normalizers, $encoders);
 ```
 
+Normalization accepts any `UriInterface` implementation. Denormalization supports
+`UriInterface` and `GuzzleHttp\Psr7\Uri` declarations and returns the object created
+by the injected factory. To use the concrete Guzzle type, inject a factory that
+returns that implementation, such as `GuzzleHttp\Psr7\HttpFactory`.
+
+The normalizer is independent of format and context. URI strings, including empty
+and relative URIs, are passed to the factory unchanged. Non-string denormalization
+input raises `TypeError`; invalid URI syntax is rejected according to the factory's
+validation rules. Support checks describe the supported types and do not validate
+the input URI.
+
+To update an existing installation:
+
+```sh
+composer require invis1ble/symfony-serializer-extension:^1.2 --with-all-dependencies
+```
+
 
 Development
 -----------
@@ -69,6 +101,12 @@ Development
 3. Run `docker compose up -d --wait` to start the Docker containers
 4. Run `docker compose exec php composer install` to install dependencies
 5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+
+Development uses PHP 8.4 by default. Set `PHP_VERSION` consistently for Compose
+commands to select another version, for example `PHP_VERSION=8.2 docker compose
+build`. CI tests Symfony 6.4 on PHP 8.1, Symfony 7 on PHP 8.2, and Symfony 8 on PHP
+8.4 and 8.5, including both supported PSR-7 major versions. Development dependencies
+use stable releases; PHPUnit's compatible major is selected for the PHP version.
 
 ### Check for Coding Standards violations
 
