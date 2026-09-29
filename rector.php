@@ -13,8 +13,8 @@ return RectorConfig::configure()
         __DIR__ . '/tests',
     ])
     ->withPhpSets()
+    ->withComposerBased(symfony: true)
     ->withSets([
-        SymfonySetList::SYMFONY_64,
         SymfonySetList::SYMFONY_CODE_QUALITY,
         SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
     ])
@@ -22,6 +22,6 @@ return RectorConfig::configure()
         AddVoidReturnTypeWhereNoReturnRector::class,
     ])
     ->withCache(
-        cacheDirectory: '/tmp/rector',
+        cacheDirectory: __DIR__ . '/var/cache/rector',
         cacheClass: FileCacheStorage::class,
     );

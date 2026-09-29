@@ -8,13 +8,13 @@ jobs:
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
       -
         name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v4.3.0
       -
         name: Build Docker images
-        uses: docker/bake-action@v4
+        uses: docker/bake-action@v7.4.0
         with:
           pull: true
           load: true
@@ -41,13 +41,13 @@ jobs:
         run: docker compose exec -T php bin/php-cs-fixer
       -
         name: Rector Cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6.1.0
         with:
-          path: /tmp/rector
+          path: var/cache/rector
           key: ${{ runner.os }}-rector-${{ github.run_id }}
           restore-keys: ${{ runner.os }}-rector-
       -
-        run: mkdir -p /tmp/rector
+        run: mkdir -p var/cache/rector
       -
         name: Rector Dry Run
         run: docker compose exec -T php bin/rector
@@ -56,16 +56,18 @@ jobs:
         run: docker compose exec -T php vendor/bin/phpunit --coverage-clover var/log/coverage-clover.xml
       -
         name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v7.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          files: var/log/coverage-clover.xml
+          fail_ci_if_error: true
   lint:
     name: Docker Lint
     runs-on: ubuntu-latest
     steps:
       -
         name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7.0.1
       -
         name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
+        uses: hadolint/hadolint-action@v3.5.0

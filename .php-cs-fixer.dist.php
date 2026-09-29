@@ -7,6 +7,7 @@ use PhpCsFixer\Finder;
 
 $finder = Finder::create()
     ->exclude('vendor')
+    ->exclude('var')
     ->in(__DIR__)
 ;
 
