@@ -1,6 +1,7 @@
 /var/
 /vendor/
 composer.lock
+/AGENTS.md
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.cache

@@ -1,0 +1,9 @@
+.git
+.codex
+AGENTS.md
+vendor
+var
+composer.lock
+.php-cs-fixer.cache
+.phpcs.cache
+.phpunit.result.cache
