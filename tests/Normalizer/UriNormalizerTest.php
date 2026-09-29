@@ -15,12 +15,9 @@ class UriNormalizerTest extends TestCase
 {
     private readonly UriNormalizer $normalizer;
 
-    private readonly UriFactoryInterface $uriFactory;
-
     protected function setUp(): void
     {
-        $this->uriFactory = $this->createMock(UriFactoryInterface::class);
-        $this->normalizer = new UriNormalizer($this->uriFactory);
+        $this->normalizer = new UriNormalizer($this->createStub(UriFactoryInterface::class));
     }
 
     #[DataProvider('provideSupportedType')]
@@ -40,7 +37,7 @@ class UriNormalizerTest extends TestCase
     #[DataProvider('provideSupportedType')]
     public function testSupportsNormalization(string $fqn): void
     {
-        $uri = $this->createMock($fqn);
+        $uri = $this->createStub($fqn);
 
         $this->assertTrue($this->normalizer->supportsNormalization($uri));
     }
@@ -48,7 +45,7 @@ class UriNormalizerTest extends TestCase
     #[DataProvider('provideNotSupportedType')]
     public function testDoesNotSupportNormalization(string $fqn): void
     {
-        $uri = $this->createMock($fqn);
+        $uri = $this->createStub($fqn);
 
         $this->assertFalse($this->normalizer->supportsNormalization($uri));
     }
@@ -64,14 +61,15 @@ class UriNormalizerTest extends TestCase
     #[DataProvider('provideSupportedType')]
     public function testDenormalize(string $fqn): void
     {
-        $uri = $this->createMock($fqn);
+        $uri = $this->createStub($fqn);
+        $uriFactory = $this->createMock(UriFactoryInterface::class);
 
-        $this->uriFactory->expects($this->once())
+        $uriFactory->expects($this->once())
             ->method('createUri')
             ->with('https://example.com')
             ->willReturn($uri);
 
-        $result = $this->normalizer->denormalize('https://example.com', $fqn);
+        $result = (new UriNormalizer($uriFactory))->denormalize('https://example.com', $fqn);
 
         $this->assertSame($uri, $result);
     }

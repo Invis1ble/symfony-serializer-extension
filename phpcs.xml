@@ -9,7 +9,7 @@
     <arg name="extensions" value="php" />
 
     <config name="installed_paths" value="vendor/escapestudios/symfony2-coding-standard" />
-    <config name="testVersion" value="8.2-" />
+    <config name="testVersion" value="8.1-" />
 
     <rule ref="Symfony">
         <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound" />

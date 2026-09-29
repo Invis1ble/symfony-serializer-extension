@@ -5,6 +5,26 @@ on: [push, pull_request]
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - php: '8.1'
+            symfony: '^6.4'
+            psr-http-message: '^1.1'
+          - php: '8.2'
+            symfony: '^7.0'
+            psr-http-message: '^2.0'
+          - php: '8.4'
+            symfony: '^8.0'
+            psr-http-message: '^2.0'
+          - php: '8.5'
+            symfony: '^8.0'
+            psr-http-message: '^2.0'
+    env:
+      PHP_VERSION: ${{ matrix.php }}
+      SYMFONY_VERSION: ${{ matrix.symfony }}
+      PSR_HTTP_MESSAGE_VERSION: ${{ matrix.psr-http-message }}
     steps:
       -
         name: Checkout
@@ -22,17 +42,29 @@ jobs:
             compose.yaml
             compose.override.yaml
           set: |
-            *.cache-from=type=gha,scope=${{github.ref}}
-            *.cache-from=type=gha,scope=refs/heads/main
-            *.cache-to=type=gha,scope=${{github.ref}},mode=max
+            *.cache-from=type=gha,scope=${{github.ref}}-php-${{ matrix.php }}
+            *.cache-from=type=gha,scope=refs/heads/main-php-${{ matrix.php }}
+            *.cache-to=type=gha,scope=${{github.ref}}-php-${{ matrix.php }},mode=max
       -
         name: Start services
         run: docker compose up --wait --no-build
         env:
           XDEBUG_MODE: coverage
       -
+        name: Resolve matrix dependencies
+        run: >-
+          docker compose exec -T php composer update
+          --with "symfony/serializer:${SYMFONY_VERSION}"
+          --with "psr/http-message:${PSR_HTTP_MESSAGE_VERSION}"
+          --no-install --no-interaction --no-progress
+      -
         name: Install Dependencies
         run: docker compose exec -T php composer install -vvv --no-ansi --no-interaction
+      -
+        name: Validate package and platform requirements
+        run: |
+          docker compose exec -T php composer validate --strict
+          docker compose exec -T php composer check-platform-reqs
       -
         name: Check Code Quality via PHP_CodeSniffer
         run: docker compose exec -T php bin/php_codesniffer
@@ -44,8 +76,8 @@ jobs:
         uses: actions/cache@v6.1.0
         with:
           path: var/cache/rector
-          key: ${{ runner.os }}-rector-${{ github.run_id }}
-          restore-keys: ${{ runner.os }}-rector-
+          key: ${{ runner.os }}-php-${{ matrix.php }}-rector-${{ github.run_id }}
+          restore-keys: ${{ runner.os }}-php-${{ matrix.php }}-rector-
       -
         run: mkdir -p var/cache/rector
       -
